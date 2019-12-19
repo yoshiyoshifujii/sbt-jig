@@ -1,5 +1,4 @@
-$ pause
 > compile
-$ pause
 > jigReports
-$ pause
+$ exists target/jig/business-rule-relation.svg
+$ exists target/jig/package-relation-depth5.svg
