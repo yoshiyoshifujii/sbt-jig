@@ -13,7 +13,15 @@ object JigPlugin extends AutoPlugin {
   import autoImport._
 
   override lazy val projectSettings = Seq(
-    jigReports := Jig.jigReportsTask(jig).value
+    jigReports := Jig.jigReportsTask(jig).value,
+    jigDocumentTypeText in jig := "",
+    jigOutputDirectoryText in jig := "./target/jig",
+    jigOutputOmitPrefix in jig := ".+\\.(service|domain\\.(model|type))\\.",
+    jigModelPattern in jig := ".+\\.domain\\.(model|type)\\..+",
+    jigProjectPath in jig := "./",
+    jigDirectoryClasses in jig := Jig.makeClasses().value,
+    jigDirectoryResources in jig := Jig.makeClasses().value,
+    jigDirectorySources in jig := "src/main/scala"
   )
 
   override lazy val buildSettings = Seq()

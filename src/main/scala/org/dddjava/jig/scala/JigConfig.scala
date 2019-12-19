@@ -14,18 +14,16 @@ import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
 
 import scala.collection.JavaConverters._
 
-case class JigConfig() {
-
-  private val documentTypeText    = ""
-  private val outputDirectoryText = "./target/jig"
-
-  private val outputOmitPrefix = ".+\\.(service|domain\\.(model|type))\\."
-  private val modelPattern     = ".+\\.domain\\.(model|type)\\..+"
-
-  private val projectPath        = "./"
-  private val directoryClasses   = "target/scala-2.12/classes"
-  private val directoryResources = "target/scala-2.12/classes"
-  private val directorySources   = "src/main/scala"
+case class JigConfig(
+    private val documentTypeText: String,
+    private val outputDirectoryText: String,
+    private val outputOmitPrefix: String,
+    private val modelPattern: String,
+    private val projectPath: String,
+    private val directoryClasses: String,
+    private val directoryResources: String,
+    private val directorySources: String
+) {
 
   def propertiesText(): String =
     new StringJoiner("\n")
