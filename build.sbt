@@ -16,3 +16,6 @@ lazy val root = (project in file("."))
       scriptedLaunchOpts ++=
         Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
     )
+  .settings(
+    credentials += Credentials(Path.userHome / ".sbt" / "sonatype_credential")
+  )
