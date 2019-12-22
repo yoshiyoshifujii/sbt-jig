@@ -27,8 +27,7 @@ object Jig {
 
   def makeClasses(): Initialize[String] =
     Def.setting {
-      val sbv = scalaBinaryVersion.value
-      s"target/scala-$sbv/classes"
+      s"target/scala-${scalaBinaryVersion.value}/classes"
     }
 
 }

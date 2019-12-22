@@ -28,3 +28,17 @@ pomExtra := (<url>https://github.com/yoshiyoshifujii/sbt-jig</url>
       <url>https://github.com/yoshiyoshifujii</url>
     </developer>
   </developers>)
+
+credentials := {
+  (
+    sys.env.get("CREDENTIALS_REALM"),
+    sys.env.get("CREDENTIALS_HOST"),
+    sys.env.get("CREDENTIALS_USER_NAME"),
+    sys.env.get("CREDENTIALS_PASSWORD")
+  ) match {
+    case (Some(r), Some(h), Some(u), Some(p)) =>
+      Credentials(r, h, u, p) :: Nil
+    case _ =>
+      Credentials((baseDirectory in LocalRootProject).value / ".credentials") :: Nil
+  }
+}
