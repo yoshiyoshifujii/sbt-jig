@@ -14,3 +14,11 @@ lazy val root = (project in file("."))
     scriptedLaunchOpts ++=
       Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
   )
+  .settings(
+    licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.html")),
+    publishMavenStyle := false,
+    bintrayRepository := "sbt-plugins",
+    bintrayOrganization in bintray := None,
+    bintrayPackageLabels := Seq("sbt","plugin"),
+    bintrayVcsUrl := Some("""git@github.com:yoshiyoshifujii/sbt-jig.git""")
+  )
