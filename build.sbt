@@ -6,7 +6,8 @@ lazy val root = (project in file("."))
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
       "org.scalatest"   %% "scalatest" % "3.0.1" % Test,
-      "org.dddjava.jig" % "jig-core"   % "2019.12.2"
+      "org.dddjava.jig" % "jig-core"   % "2020.1.2",
+      "org.scalameta"   %% "scalameta" % "4.3.0"
     )
   )
   .settings(
@@ -19,6 +20,6 @@ lazy val root = (project in file("."))
     publishMavenStyle := false,
     bintrayRepository := "sbt-plugins",
     bintrayOrganization in bintray := None,
-    bintrayPackageLabels := Seq("sbt","plugin"),
+    bintrayPackageLabels := Seq("sbt", "plugin"),
     bintrayVcsUrl := Some("""git@github.com:yoshiyoshifujii/sbt-jig.git""")
   )
