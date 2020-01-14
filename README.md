@@ -10,6 +10,7 @@ project/plugins.sbt
 
 ```sbt
 resolvers += Resolver.jcenterRepo
+resolvers += Resolver.bintrayIvyRepo("yoshiyoshifujii", "sbt-plugins")
 
 addSbtPlugin("com.github.yoshiyoshifujii" % "sbt-jig" % <version>)
 ```
