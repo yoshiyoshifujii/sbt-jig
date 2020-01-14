@@ -9,6 +9,7 @@ import org.dddjava.jig.domain.model.jigloaded.alias.SourceCodeAliasReader
 import org.dddjava.jig.domain.model.jigsource.source.SourcePaths
 import org.dddjava.jig.domain.model.jigsource.source.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.jigsource.source.code.CodeSourcePaths
+import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.configuration.{ Configuration, JigProperties, OutputOmitPrefix }
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
 
@@ -66,7 +67,7 @@ case class JigConfig(
         modelPattern,
         new OutputOmitPrefix(outputOmitPrefix)
       ),
-      new SourceCodeAliasReader(new JavaparserAliasReader())
+      new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
     )
 
   def jigDocuments(): Seq[JigDocument] =
