@@ -16,7 +16,7 @@ object JigExecutor {
     val configuration = cliConfig.configuration()
 
     println(
-      s"-- configuration -------------------------------------------\n${cliConfig.propertiesText()}\n------------------------------------------------------------",
+      s"-- configuration -------------------------------------------\n${cliConfig.propertiesText()}\n------------------------------------------------------------"
     )
 
     val startTime = System.currentTimeMillis
@@ -39,8 +39,10 @@ object JigExecutor {
     if (status.hasWarning) {
       println(jigMessages.getString("implementation.warning"))
       status.listWarning().asScala.foreach { analyzeStatus =>
-        println(jigMessages.getString("implementation.warning.details"),
-                jigMessages.getString(analyzeStatus.messageKey))
+        println(
+          jigMessages.getString("implementation.warning.details"),
+          jigMessages.getString(analyzeStatus.messageKey)
+        )
       }
     }
 
@@ -58,7 +60,7 @@ object JigExecutor {
       }.mkString("\n")
 
     println(
-      s"-- output documents -------------------------------------------\n${resultLog}\n------------------------------------------------------------",
+      s"-- output documents -------------------------------------------\n${resultLog}\n------------------------------------------------------------"
     )
     println(jigMessages.getString("success"), System.currentTimeMillis - startTime)
   }

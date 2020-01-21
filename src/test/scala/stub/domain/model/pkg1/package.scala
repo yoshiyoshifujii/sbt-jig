@@ -3,15 +3,13 @@ package stub.domain.model
 package object pkg1 {
 
   /**
-   * パッケージObjectのTrait
-   */
+    * パッケージObjectのTrait
+    */
   trait PackageObjectTrait
 
   /**
-   * パッケージObjectのObject
-   */
-  object PackageObject {
-
-  }
+    * パッケージObjectのObject
+    */
+  object PackageObject {}
 
 }

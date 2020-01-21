@@ -46,13 +46,13 @@ object ScalaMethodScaladocStub {
   case object SealedCaseObject2 extends SealedTrait
 
   /**
-   * Objectの中のObject
-   */
+    * Objectの中のObject
+    */
   object ObjectInObject {
 
     /**
-     * Objectの中のObjectの中のObject
-     */
+      * Objectの中のObjectの中のObject
+      */
     case class ObjectInObjectInObject()
   }
 }

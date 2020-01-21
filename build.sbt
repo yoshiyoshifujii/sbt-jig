@@ -23,3 +23,6 @@ lazy val root = (project in file("."))
     bintrayPackageLabels := Seq("sbt", "plugin"),
     bintrayVcsUrl := Some("""git@github.com:yoshiyoshifujii/sbt-jig.git""")
   )
+  .settings(
+    scalafmtOnCompile in ThisBuild := true
+  )

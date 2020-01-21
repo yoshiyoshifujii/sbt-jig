@@ -1,31 +1,32 @@
 package org.dddjava.jig.application.service
 
 import java.net.URI
-import java.nio.file.{Path, Paths}
+import java.nio.file.{ Path, Paths }
 import java.util.Collections
 
 import org.dddjava.jig.domain.model.declaration.`type`.TypeIdentifier
-import org.dddjava.jig.domain.model.declaration.method.{Arguments, MethodIdentifier, MethodSignature}
 import org.dddjava.jig.domain.model.jigloaded.alias.SourceCodeAliasReader
 import org.dddjava.jig.domain.model.jigsource.source.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.jigsource.source.code.CodeSourcePaths
-import org.dddjava.jig.domain.model.jigsource.source.{SourcePaths, Sources}
+import org.dddjava.jig.domain.model.jigsource.source.{ SourcePaths, Sources }
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.filesystem.LocalFileSourceReader
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
 import org.dddjava.jig.infrastructure.onmemoryrepository.OnMemoryAliasRepository
-import org.scalatest._
+import org.scalatest.freespec.AnyFreeSpec
 import stub.domain.model.ScalaMethodScaladocStub.ObjectInObject.ObjectInObjectInObject
 import stub.domain.model.ScalaMethodScaladocStub.SealedTrait
 import stub.domain.model.pkg1.PackageObjectTrait
-import stub.domain.model.{ScalaMethodScaladocStub, ScalaStub}
+import stub.domain.model.{ ScalaMethodScaladocStub, ScalaStub }
 
-class AliasServiceSpec extends FreeSpec {
+class AliasServiceSpec extends AnyFreeSpec {
 
   "AliasService" - {
     lazy val sut: AliasService =
-      new AliasService(new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader()),
-                       new OnMemoryAliasRepository())
+      new AliasService(
+        new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader()),
+        new OnMemoryAliasRepository()
+      )
     lazy val defaultPackageClassURI: URI = this.getClass.getResource("/DefaultPackageClass.class").toURI.resolve("./")
     lazy val getModuleRootPath: Path = {
       var path = Paths.get(defaultPackageClassURI).toAbsolutePath
