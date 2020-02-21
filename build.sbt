@@ -5,7 +5,7 @@ lazy val root = (project in file("."))
     organization := "com.github.yoshiyoshifujii",
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
-      "org.scalatest"   %% "scalatest" % "3.1.0" % Test,
+      "org.scalatest"   %% "scalatest" % "3.1.1" % Test,
       "org.dddjava.jig" % "jig-core"   % "2020.2.3",
       "org.scalameta"   %% "scalameta" % "4.3.0"
     )
