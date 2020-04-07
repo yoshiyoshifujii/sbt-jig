@@ -1,6 +1,7 @@
 # sbt-jig
 
 ![Scala CI](https://github.com/yoshiyoshifujii/sbt-jig/workflows/Scala%20CI/badge.svg)
+[ ![Download](https://api.bintray.com/packages/yoshiyoshifujii/sbt-plugins/sbt-jig/images/download.svg) ](https://bintray.com/yoshiyoshifujii/sbt-plugins/sbt-jig/_latestVersion)
 
 An sbt AutoPlugin
 
