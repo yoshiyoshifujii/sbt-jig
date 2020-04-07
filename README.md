@@ -1,5 +1,7 @@
 # sbt-jig
 
+![Scala CI](https://github.com/yoshiyoshifujii/sbt-jig/workflows/Scala%20CI/badge.svg)
+
 An sbt AutoPlugin
 
 ## Usage
