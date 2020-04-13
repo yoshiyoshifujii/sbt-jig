@@ -7,7 +7,7 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.scalatest"   %% "scalatest" % "3.1.1" % Test,
       "org.dddjava.jig" % "jig-core"   % "2020.4.2",
-      "org.scalameta"   %% "scalameta" % "4.3.7"
+      "org.scalameta"   %% "scalameta" % "4.3.8"
     )
   )
   .settings(
