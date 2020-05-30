@@ -5,7 +5,7 @@ import java.nio.file.{ Path, Paths }
 import java.util.Collections
 
 import org.dddjava.jig.domain.model.declaration.`type`.TypeIdentifier
-import org.dddjava.jig.domain.model.jigloader.SourceCodeAliasReader
+import org.dddjava.jig.domain.model.jigsource.jigloader.SourceCodeAliasReader
 import org.dddjava.jig.domain.model.jigsource.source.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.jigsource.source.code.CodeSourcePaths
 import org.dddjava.jig.domain.model.jigsource.source.{ SourcePaths, Sources }
