@@ -4,11 +4,11 @@ import java.net.URI
 import java.nio.file.{ Path, Paths }
 import java.util.Collections
 
-import org.dddjava.jig.domain.model.declaration.`type`.TypeIdentifier
+import org.dddjava.jig.domain.model.jigmodel.lowmodel.declaration.`type`.TypeIdentifier
+import org.dddjava.jig.domain.model.jigsource.file.binary.BinarySourcePaths
+import org.dddjava.jig.domain.model.jigsource.file.text.CodeSourcePaths
+import org.dddjava.jig.domain.model.jigsource.file.{ SourcePaths, Sources }
 import org.dddjava.jig.domain.model.jigsource.jigloader.SourceCodeAliasReader
-import org.dddjava.jig.domain.model.jigsource.source.binary.BinarySourcePaths
-import org.dddjava.jig.domain.model.jigsource.source.code.CodeSourcePaths
-import org.dddjava.jig.domain.model.jigsource.source.{ SourcePaths, Sources }
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.filesystem.LocalFileSourceReader
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader

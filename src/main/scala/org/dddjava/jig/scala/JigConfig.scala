@@ -4,11 +4,11 @@ import java.io.{ IOException, UncheckedIOException }
 import java.nio.file.{ Files, Path, Paths }
 import java.util.StringJoiner
 
-import org.dddjava.jig.domain.model.jigdocument.JigDocument
+import org.dddjava.jig.domain.model.jigdocument.documentformat.JigDocument
+import org.dddjava.jig.domain.model.jigsource.file.SourcePaths
+import org.dddjava.jig.domain.model.jigsource.file.binary.BinarySourcePaths
+import org.dddjava.jig.domain.model.jigsource.file.text.CodeSourcePaths
 import org.dddjava.jig.domain.model.jigsource.jigloader.SourceCodeAliasReader
-import org.dddjava.jig.domain.model.jigsource.source.SourcePaths
-import org.dddjava.jig.domain.model.jigsource.source.binary.BinarySourcePaths
-import org.dddjava.jig.domain.model.jigsource.source.code.CodeSourcePaths
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.configuration.{ Configuration, JigProperties, OutputOmitPrefix }
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
