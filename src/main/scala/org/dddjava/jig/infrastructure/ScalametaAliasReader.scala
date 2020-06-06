@@ -2,10 +2,10 @@ package org.dddjava.jig.infrastructure
 
 import java.nio.charset.StandardCharsets
 
-import org.dddjava.jig.domain.model.declaration.`type`.TypeIdentifier
-import org.dddjava.jig.domain.model.jigloaded.alias._
+import org.dddjava.jig.domain.model.jigmodel.lowmodel.alias._
+import org.dddjava.jig.domain.model.jigmodel.lowmodel.declaration.`type`.TypeIdentifier
+import org.dddjava.jig.domain.model.jigsource.file.text.scalacode.ScalaSources
 import org.dddjava.jig.domain.model.jigsource.jigloader.ScalaSourceAliasReader
-import org.dddjava.jig.domain.model.jigsource.source.code.scalacode.ScalaSources
 
 import scala.collection.JavaConverters._
 import scala.meta._
