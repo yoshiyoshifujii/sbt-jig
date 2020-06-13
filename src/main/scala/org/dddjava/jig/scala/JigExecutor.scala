@@ -3,7 +3,6 @@ package org.dddjava.jig.scala
 import java.nio.file.Path
 
 import org.dddjava.jig.infrastructure.resourcebundle.Utf8ResourceBundle
-import org.dddjava.jig.presentation.view.handler.HandlerMethodArgumentResolver
 
 import scala.collection.JavaConverters._
 
@@ -21,13 +20,13 @@ object JigExecutor {
 
     val startTime = System.currentTimeMillis
 
-    val implementationService = configuration.implementationService
-    val jigDocumentHandlers   = configuration.documentHandlers
+    val jigSourceReadService = configuration.implementationService
+    val jigDocumentHandlers  = configuration.documentHandlers
 
-    val sourcePaths     = cliConfig.rawSourceLocations()
-    val implementations = implementationService.implementations(sourcePaths)
+    val sourcePaths            = cliConfig.rawSourceLocations()
+    val analyzedImplementation = jigSourceReadService.readSourceFromPaths(sourcePaths)
 
-    val status = implementations.status
+    val status = analyzedImplementation.status
     if (status.hasError) {
       println(jigMessages.getString("failure"))
       status.listErrors().asScala.foreach { analyzeStatus =>
@@ -50,7 +49,7 @@ object JigExecutor {
 
     val handleResultList =
       jigDocuments.map { jigDocument =>
-        jigDocumentHandlers.handle(jigDocument, new HandlerMethodArgumentResolver(implementations), outputDirectory)
+        jigDocumentHandlers.handle(jigDocument, outputDirectory)
       }
 
     val resultLog = handleResultList
