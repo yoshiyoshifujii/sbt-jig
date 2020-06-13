@@ -12,7 +12,7 @@ import org.dddjava.jig.domain.model.jigsource.jigloader.SourceCodeAliasReader
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.filesystem.LocalFileSourceReader
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
-import org.dddjava.jig.infrastructure.onmemoryrepository.OnMemoryAliasRepository
+import org.dddjava.jig.infrastructure.onmemoryrepository.{ OnMemoryAliasRepository, OnMemoryJigSourceRepository }
 import org.scalatest.freespec.AnyFreeSpec
 import stub.domain.model.ScalaMethodScaladocStub.ObjectInObject.ObjectInObjectInObject
 import stub.domain.model.ScalaMethodScaladocStub.SealedTrait
@@ -22,11 +22,12 @@ import stub.domain.model.{ ScalaMethodScaladocStub, ScalaStub }
 class AliasServiceSpec extends AnyFreeSpec {
 
   "AliasService" - {
-    lazy val sut: AliasService =
-      new AliasService(
-        new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader()),
-        new OnMemoryAliasRepository()
-      )
+    lazy val sourceCodeAliasReader   = new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
+    lazy val onMemoryAliasRepository = new OnMemoryAliasRepository()
+    lazy val jigSourceRepository     = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
+    lazy val jigSourceReadService =
+      new JigSourceReadService(jigSourceRepository, null, sourceCodeAliasReader, null, null)
+    lazy val sut: AliasService           = new AliasService(onMemoryAliasRepository)
     lazy val defaultPackageClassURI: URI = this.getClass.getResource("/DefaultPackageClass.class").toURI.resolve("./")
     lazy val getModuleRootPath: Path = {
       var path = Paths.get(defaultPackageClassURI).toAbsolutePath
@@ -49,8 +50,8 @@ class AliasServiceSpec extends AnyFreeSpec {
     }
 
     "Scalaクラス別名取得" in {
-      val source = getTestRawSource
-      sut.loadAliases(source.aliasSource())
+      val sources = getTestRawSource
+      jigSourceReadService.readAliases(sources.aliasSource())
 
       val typeAlias1 = sut.typeAliasOf(new TypeIdentifier(classOf[ScalaStub]))
       assert(typeAlias1.asText() === "ScalaのクラスのDoc")
