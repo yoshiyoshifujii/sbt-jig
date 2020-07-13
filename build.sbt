@@ -6,7 +6,7 @@ lazy val root = (project in file("."))
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
       "org.scalatest"   %% "scalatest" % "3.2.0" % Test,
-      "org.dddjava.jig" % "jig-core"   % "2020.7.1",
+      "org.dddjava.jig" % "jig-core"   % "2020.7.2",
       "org.scalameta"   %% "scalameta" % "4.3.19"
     )
   )
