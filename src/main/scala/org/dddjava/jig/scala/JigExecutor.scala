@@ -54,7 +54,7 @@ object JigExecutor {
 
     val resultLog = handleResultList
       .filter(_.success)
-      .map { handleResult => handleResult.jigDocument + " : " + handleResult.outputFilePaths }.mkString("\n")
+      .map { handleResult => handleResult.jigDocument + " : " + handleResult.outputFilePathsText() }.mkString("\n")
 
     println(
       s"-- output documents -------------------------------------------\n${resultLog}\n------------------------------------------------------------"
