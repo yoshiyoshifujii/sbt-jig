@@ -5,6 +5,7 @@ import java.nio.file.{ Files, Path, Paths }
 import java.util.StringJoiner
 
 import org.dddjava.jig.domain.model.jigdocument.documentformat.JigDocument
+import org.dddjava.jig.domain.model.jigdocument.stationery.LinkPrefix
 import org.dddjava.jig.domain.model.jigsource.file.SourcePaths
 import org.dddjava.jig.domain.model.jigsource.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.jigsource.file.text.CodeSourcePaths
@@ -20,10 +21,14 @@ case class JigConfig(
     private val outputDirectoryText: String,
     private val outputOmitPrefix: String,
     private val modelPattern: String,
+    private val applicationPattern: String,
+    private val infrastructurePattern: String,
+    private val presentationPattern: String,
     private val projectPath: String,
     private val directoryClasses: String,
     private val directoryResources: String,
-    private val directorySources: String
+    private val directorySources: String,
+    private val linkPrefix: String
 ) {
 
   def propertiesText(): String =
@@ -32,10 +37,12 @@ case class JigConfig(
       .add("outputDirectory=" + outputDirectory)
       .add("output.omit.prefix=" + outputOmitPrefix)
       .add("jig.model.pattern=" + modelPattern)
+      .add("jig.infrastructure.pattern=" + infrastructurePattern)
       .add("project.path=" + projectPath)
       .add("directory.classes=" + directoryClasses)
       .add("directory.resources=" + directoryResources)
       .add("directory.sources=" + directorySources)
+      .add("linkPrefix=" + linkPrefix)
       .toString
 
   def outputDirectory(): Path = Paths.get(outputDirectoryText)
@@ -65,7 +72,11 @@ case class JigConfig(
     new Configuration(
       new JigProperties(
         modelPattern,
-        new OutputOmitPrefix(outputOmitPrefix)
+        applicationPattern,
+        infrastructurePattern,
+        presentationPattern,
+        new OutputOmitPrefix(outputOmitPrefix),
+        new LinkPrefix(linkPrefix)
       ),
       new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
     )

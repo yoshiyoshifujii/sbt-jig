@@ -1,8 +1,7 @@
 package org.dddjava.jig.sbt
 
+import org.dddjava.jig.domain.model.jigdocument.stationery.LinkPrefix
 import sbt._
-import sbt.Keys._
-import sbt.plugins.JvmPlugin
 
 object JigPlugin extends AutoPlugin {
 
@@ -18,10 +17,14 @@ object JigPlugin extends AutoPlugin {
     jigOutputDirectoryText in jig := "./target/jig",
     jigOutputOmitPrefix in jig := ".+\\.(service|domain\\.(model|type))\\.",
     jigModelPattern in jig := ".+\\.domain\\.(model|type)\\..+",
+    jigApplicationPattern in jig := ".+\\.application\\..+",
+    jigInfrastructurePattern in jig := ".+\\.infrastructure\\..+",
+    jigPresentationPattern in jig := ".+\\.presentation\\..+",
     jigProjectPath in jig := "./",
     jigDirectoryClasses in jig := Jig.makeClasses().value,
     jigDirectoryResources in jig := Jig.makeClasses().value,
-    jigDirectorySources in jig := "src/main/scala"
+    jigDirectorySources in jig := "src/main/scala",
+    jigLinkPrefix in jig := LinkPrefix.DISABLE
   )
 
   override lazy val buildSettings = Seq()
