@@ -1,6 +1,5 @@
 package stub.domain.model
 
-/**
-  * ScalaのクラスのDoc
+/** ScalaのクラスのDoc
   */
 class ScalaStub {}

@@ -2,13 +2,11 @@ package stub.domain.model
 
 package object pkg1 {
 
-  /**
-    * パッケージObjectのTrait
+  /** パッケージObjectのTrait
     */
   trait PackageObjectTrait
 
-  /**
-    * パッケージObjectのObject
+  /** パッケージObjectのObject
     */
   object PackageObject {}
 

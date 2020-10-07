@@ -2,40 +2,33 @@ package stub.domain.model
 
 import java.time.LocalDateTime
 
-/**
-  * ScalaのTraitのDoc
+/** ScalaのTraitのDoc
   */
 trait ScalaMethodScaladocStub {
 
-  /**
-    * メソッドのドキュメント
+  /** メソッドのドキュメント
     */
   def simpleMethod(): Unit = ???
 
-  /**
-    * 引数なしのメソッド
+  /** 引数なしのメソッド
     */
   def overloadMethod(): Option[String] = ???
 
-  /**
-    * 引数ありのメソッド
+  /** 引数ありのメソッド
     */
   def overloadMethod(str: String, dateTime: LocalDateTime): Option[String] = ???
 
 }
 
-/**
-  * ScalaのObjectのDoc
+/** ScalaのObjectのDoc
   */
 object ScalaMethodScaladocStub {
 
-  /**
-    * コンパニオンオブジェクトのメソッド
+  /** コンパニオンオブジェクトのメソッド
     */
   def companionObjectMethod(): Unit = ???
 
-  /**
-    * Object内のTrait
+  /** Object内のTrait
     */
   sealed trait SealedTrait
 
@@ -45,13 +38,11 @@ object ScalaMethodScaladocStub {
   /** SealedされたCaseObjectの2 */
   case object SealedCaseObject2 extends SealedTrait
 
-  /**
-    * Objectの中のObject
+  /** Objectの中のObject
     */
   object ObjectInObject {
 
-    /**
-      * Objectの中のObjectの中のObject
+    /** Objectの中のObjectの中のObject
       */
     case class ObjectInObjectInObject()
   }
