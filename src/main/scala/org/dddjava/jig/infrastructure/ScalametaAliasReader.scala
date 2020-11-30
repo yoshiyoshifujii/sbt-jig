@@ -2,7 +2,12 @@ package org.dddjava.jig.infrastructure
 
 import java.nio.charset.StandardCharsets
 
-import org.dddjava.jig.domain.model.jigmodel.lowmodel.alias._
+import org.dddjava.jig.domain.model.jigmodel.lowmodel.alias.{
+  DocumentationComment,
+  MethodAlias,
+  TypeAlias,
+  TypeAliases
+}
 import org.dddjava.jig.domain.model.jigmodel.lowmodel.declaration.`type`.TypeIdentifier
 import org.dddjava.jig.domain.model.jigsource.file.text.scalacode.ScalaSources
 import org.dddjava.jig.domain.model.jigsource.jigloader.ScalaSourceAliasReader
@@ -39,9 +44,9 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
     private lazy val fullName: String       = s"$packageName${tree.name}"
     lazy val typeIdentifier: TypeIdentifier = new TypeIdentifier(fullName)
 
-    lazy val maybeAlias: Option[Alias] = doxText match {
-      case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(new JavadocAliasSource(name).toAlias)
-      case Some(DocToken(DocToken.Description, _, Some(body)) :: _) => Some(new JavadocAliasSource(body).toAlias)
+    lazy val maybeDocumentationComment: Option[DocumentationComment] = doxText match {
+      case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(DocumentationComment.fromText(name))
+      case Some(DocToken(DocToken.Description, _, Some(body)) :: _) => Some(DocumentationComment.fromText(body))
       case _                                                        => None
     }
   }
@@ -114,9 +119,9 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
           val source        = parse(input)
           val documentables = extractFromTree(source)
           val typeAliasList = for {
-            documentable <- documentables
-            alias        <- documentable.maybeAlias
-          } yield new TypeAlias(documentable.typeIdentifier, alias)
+            documentable         <- documentables
+            documentationComment <- documentable.maybeDocumentationComment
+          } yield new TypeAlias(documentable.typeIdentifier, documentationComment)
 
           (acc1 ::: typeAliasList, acc2)
       }
