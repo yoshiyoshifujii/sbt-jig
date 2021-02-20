@@ -3,8 +3,7 @@ package org.dddjava.jig.scala
 import java.io.{ IOException, UncheckedIOException }
 import java.nio.file.{ Files, Path, Paths }
 import java.util.StringJoiner
-
-import org.dddjava.jig.domain.model.jigdocument.documentformat.JigDocument
+import org.dddjava.jig.domain.model.jigdocument.documentformat.{ JigDiagramFormat, JigDocument }
 import org.dddjava.jig.domain.model.jigdocument.stationery.LinkPrefix
 import org.dddjava.jig.domain.model.jigsource.file.SourcePaths
 import org.dddjava.jig.domain.model.jigsource.file.binary.BinarySourcePaths
@@ -71,12 +70,14 @@ case class JigConfig(
   def configuration(): Configuration =
     new Configuration(
       new JigProperties(
+        new OutputOmitPrefix(outputOmitPrefix),
         modelPattern,
         applicationPattern,
         infrastructurePattern,
         presentationPattern,
-        new OutputOmitPrefix(outputOmitPrefix),
-        new LinkPrefix(linkPrefix)
+        new LinkPrefix(linkPrefix),
+        outputDirectory(),
+        JigDiagramFormat.SVG
       ),
       new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
     )
