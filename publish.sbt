@@ -16,9 +16,3 @@ ThisBuild / developers := List(
 ThisBuild / description := "sbt plugin of Java Instant-document Gazer"
 ThisBuild / licenses := List("Apache 2" -> new URL("http://www.apache.org/licenses/LICENSE-2.0.txt"))
 ThisBuild / homepage := organizationHomepage.value
-
-// Remove all additional repository other than Maven Central from POM
-ThisBuild / publishTo := {
-  if (isSnapshot.value) Some(Resolver.sonatypeRepo("snapshots"))
-  else Some(Resolver.sonatypeRepo("releases"))
-}

@@ -9,7 +9,13 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  // For non cross-build projects, use releaseStepCommand("publishSigned")
+  ReleaseStep(
+    action = { state =>
+      val extracted = Project extract state
+      extracted.runAggregated(PgpKeys.publishSigned in Global in extracted.get(thisProjectRef), state)
+    },
+    enableCrossBuild = true
+  ),
   releaseStepCommandAndRemaining("publishSigned"),
   releaseStepCommand("sonatypeBundleRelease"),
   setNextVersion,
