@@ -20,5 +20,5 @@ ThisBuild / homepage := organizationHomepage.value
 // Remove all additional repository other than Maven Central from POM
 ThisBuild / publishTo := {
   if (isSnapshot.value) Some(Resolver.sonatypeRepo("snapshots"))
-  else Some(Resolver.sonatypeRepo("release"))
+  else Some(Resolver.sonatypeRepo("releases"))
 }
