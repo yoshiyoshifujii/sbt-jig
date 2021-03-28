@@ -45,8 +45,8 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
     lazy val typeIdentifier: TypeIdentifier = new TypeIdentifier(fullName)
 
     lazy val maybeDocumentationComment: Option[DocumentationComment] = doxText match {
-      case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(DocumentationComment.fromText(name))
-      case Some(DocToken(DocToken.Description, _, Some(body)) :: _) => Some(DocumentationComment.fromText(body))
+      case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(DocumentationComment.fromCodeComment(name))
+      case Some(DocToken(DocToken.Description, _, Some(body)) :: _) => Some(DocumentationComment.fromCodeComment(body))
       case _                                                        => None
     }
   }

@@ -46,13 +46,9 @@ object JigExecutor {
     }
 
     val outputDirectory: Path = cliConfig.outputDirectory()
+    val handleResultList      = jigDocumentHandlers.handleJigDocuments(jigDocuments.asJava, outputDirectory)
 
-    val handleResultList =
-      jigDocuments.map { jigDocument =>
-        jigDocumentHandlers.handle(jigDocument, outputDirectory)
-      }
-
-    val resultLog = handleResultList
+    val resultLog = handleResultList.asScala
       .filter(_.success)
       .map { handleResult => handleResult.jigDocument + " : " + handleResult.outputFilePathsText() }.mkString("\n")
 
