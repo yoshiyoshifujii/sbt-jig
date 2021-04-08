@@ -13,18 +13,18 @@ object JigPlugin extends AutoPlugin {
 
   override lazy val projectSettings = Seq(
     jigReports := Jig.jigReportsTask(jig).value,
-    jigDocumentTypeText in jig := "",
-    jigOutputDirectoryText in jig := "./target/jig",
-    jigOutputOmitPrefix in jig := ".+\\.(service|domain\\.(model|type))\\.",
-    jigModelPattern in jig := ".+\\.domain\\.(model|type)\\..+",
-    jigApplicationPattern in jig := ".+\\.application\\..+",
-    jigInfrastructurePattern in jig := ".+\\.infrastructure\\..+",
-    jigPresentationPattern in jig := ".+\\.presentation\\..+",
-    jigProjectPath in jig := "./",
-    jigDirectoryClasses in jig := Jig.makeClasses().value,
-    jigDirectoryResources in jig := Jig.makeClasses().value,
-    jigDirectorySources in jig := "src/main/scala",
-    jigLinkPrefix in jig := LinkPrefix.DISABLE
+    jig / jigDocumentTypeText := "",
+    jig / jigOutputDirectoryText := "./target/jig",
+    jig / jigOutputOmitPrefix := ".+\\.(service|domain\\.(model|type))\\.",
+    jig / jigModelPattern := ".+\\.domain\\.(model|type)\\..+",
+    jig / jigApplicationPattern := ".+\\.application\\..+",
+    jig / jigInfrastructurePattern := ".+\\.infrastructure\\..+",
+    jig / jigPresentationPattern := ".+\\.presentation\\..+",
+    jig / jigProjectPath := "./",
+    jig / jigDirectoryClasses := Jig.makeClasses().value,
+    jig / jigDirectoryResources := Jig.makeClasses().value,
+    jig / jigDirectorySources := "src/main/scala",
+    jig / jigLinkPrefix := LinkPrefix.DISABLE
   )
 
   override lazy val buildSettings = Seq()

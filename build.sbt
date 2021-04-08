@@ -17,5 +17,5 @@ lazy val root = (project in file("."))
       Seq("-Xmx1024M", "-Dplugin.version=" + version.value)
   )
   .settings(
-    scalafmtOnCompile in ThisBuild := true
+    ThisBuild / scalafmtOnCompile := true
   )
