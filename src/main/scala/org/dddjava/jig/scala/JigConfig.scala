@@ -1,18 +1,18 @@
 package org.dddjava.jig.scala
 
-import java.io.{ IOException, UncheckedIOException }
-import java.nio.file.{ Files, Path, Paths }
-import java.util.StringJoiner
 import org.dddjava.jig.domain.model.jigdocument.documentformat.{ JigDiagramFormat, JigDocument }
 import org.dddjava.jig.domain.model.jigdocument.stationery.LinkPrefix
-import org.dddjava.jig.domain.model.jigsource.file.SourcePaths
-import org.dddjava.jig.domain.model.jigsource.file.binary.BinarySourcePaths
-import org.dddjava.jig.domain.model.jigsource.file.text.CodeSourcePaths
-import org.dddjava.jig.domain.model.jigsource.jigloader.SourceCodeAliasReader
+import org.dddjava.jig.domain.model.sources.file.SourcePaths
+import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
+import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
+import org.dddjava.jig.domain.model.sources.jigreader.SourceCodeAliasReader
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.configuration.{ Configuration, JigProperties, OutputOmitPrefix }
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
 
+import java.io.{ IOException, UncheckedIOException }
+import java.nio.file.{ Files, Path, Paths }
+import java.util.StringJoiner
 import scala.collection.JavaConverters._
 
 case class JigConfig(

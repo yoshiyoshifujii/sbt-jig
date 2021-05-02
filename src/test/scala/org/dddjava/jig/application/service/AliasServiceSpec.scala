@@ -1,29 +1,29 @@
 package org.dddjava.jig.application.service
 
-import java.net.URI
-import java.nio.file.{ Path, Paths }
-import java.util.Collections
-
-import org.dddjava.jig.domain.model.jigmodel.lowmodel.declaration.`type`.TypeIdentifier
-import org.dddjava.jig.domain.model.jigsource.file.binary.BinarySourcePaths
-import org.dddjava.jig.domain.model.jigsource.file.text.CodeSourcePaths
-import org.dddjava.jig.domain.model.jigsource.file.{ SourcePaths, Sources }
-import org.dddjava.jig.domain.model.jigsource.jigloader.SourceCodeAliasReader
+import org.dddjava.jig.domain.model.parts.class_.`type`.TypeIdentifier
+import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
+import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
+import org.dddjava.jig.domain.model.sources.file.{ SourcePaths, Sources }
+import org.dddjava.jig.domain.model.sources.jigreader.SourceCodeAliasReader
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.filesystem.LocalFileSourceReader
 import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
-import org.dddjava.jig.infrastructure.onmemoryrepository.{ OnMemoryAliasRepository, OnMemoryJigSourceRepository }
+import org.dddjava.jig.infrastructure.onmemoryrepository.{ OnMemoryCommentRepository, OnMemoryJigSourceRepository }
 import org.scalatest.freespec.AnyFreeSpec
 import stub.domain.model.ScalaMethodScaladocStub.ObjectInObject.ObjectInObjectInObject
 import stub.domain.model.ScalaMethodScaladocStub.SealedTrait
 import stub.domain.model.pkg1.PackageObjectTrait
 import stub.domain.model.{ ScalaMethodScaladocStub, ScalaStub }
 
+import java.net.URI
+import java.nio.file.{ Path, Paths }
+import java.util.Collections
+
 class AliasServiceSpec extends AnyFreeSpec {
 
   "AliasService" - {
     lazy val sourceCodeAliasReader   = new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
-    lazy val onMemoryAliasRepository = new OnMemoryAliasRepository()
+    lazy val onMemoryAliasRepository = new OnMemoryCommentRepository()
     lazy val jigSourceRepository     = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
     lazy val jigSourceReadService =
       new JigSourceReadService(jigSourceRepository, null, sourceCodeAliasReader, null, null)
