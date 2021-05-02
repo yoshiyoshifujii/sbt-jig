@@ -1,9 +1,8 @@
 package org.dddjava.jig.scala
 
-import java.nio.file.Path
-
 import org.dddjava.jig.infrastructure.resourcebundle.Utf8ResourceBundle
 
+import java.nio.file.Path
 import scala.collection.JavaConverters._
 
 object JigExecutor {
@@ -23,24 +22,23 @@ object JigExecutor {
     val jigSourceReadService = configuration.implementationService
     val jigDocumentHandlers  = configuration.documentHandlers
 
-    val sourcePaths            = cliConfig.rawSourceLocations()
-    val analyzedImplementation = jigSourceReadService.readSourceFromPaths(sourcePaths)
+    val sourcePaths  = cliConfig.rawSourceLocations()
+    val readStatuses = jigSourceReadService.readSourceFromPaths(sourcePaths)
 
-    val status = analyzedImplementation.status
-    if (status.hasError) {
+    if (readStatuses.hasError) {
       println(jigMessages.getString("failure"))
-      status.listErrors().asScala.foreach { analyzeStatus =>
-        println(jigMessages.getString("failure.details"), jigMessages.getString(analyzeStatus.messageKey))
+      readStatuses.listErrors().asScala.foreach { readStatus =>
+        println(jigMessages.getString("failure.details"), jigMessages.getString(readStatus.messageKey))
       }
       throw new RuntimeException("failure")
     }
 
-    if (status.hasWarning) {
+    if (readStatuses.hasWarning) {
       println(jigMessages.getString("implementation.warning"))
-      status.listWarning().asScala.foreach { analyzeStatus =>
+      readStatuses.listWarning().asScala.foreach { readStatus =>
         println(
           jigMessages.getString("implementation.warning.details"),
-          jigMessages.getString(analyzeStatus.messageKey)
+          jigMessages.getString(readStatus.messageKey)
         )
       }
     }

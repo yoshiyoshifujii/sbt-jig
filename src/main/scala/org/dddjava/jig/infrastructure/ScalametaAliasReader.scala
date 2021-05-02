@@ -1,17 +1,12 @@
 package org.dddjava.jig.infrastructure
 
+import org.dddjava.jig.domain.model.parts.class_.`type`.{ ClassComment, TypeIdentifier }
+import org.dddjava.jig.domain.model.parts.class_.method.MethodComment
+import org.dddjava.jig.domain.model.parts.comment.Comment
+import org.dddjava.jig.domain.model.sources.file.text.scalacode.ScalaSources
+import org.dddjava.jig.domain.model.sources.jigreader.{ ClassAndMethodComments, ScalaSourceAliasReader }
+
 import java.nio.charset.StandardCharsets
-
-import org.dddjava.jig.domain.model.jigmodel.lowmodel.alias.{
-  DocumentationComment,
-  MethodAlias,
-  TypeAlias,
-  TypeAliases
-}
-import org.dddjava.jig.domain.model.jigmodel.lowmodel.declaration.`type`.TypeIdentifier
-import org.dddjava.jig.domain.model.jigsource.file.text.scalacode.ScalaSources
-import org.dddjava.jig.domain.model.jigsource.jigloader.ScalaSourceAliasReader
-
 import scala.collection.JavaConverters._
 import scala.meta._
 import scala.meta.contrib._
@@ -44,9 +39,9 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
     private lazy val fullName: String       = s"$packageName${tree.name}"
     lazy val typeIdentifier: TypeIdentifier = new TypeIdentifier(fullName)
 
-    lazy val maybeDocumentationComment: Option[DocumentationComment] = doxText match {
-      case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(DocumentationComment.fromCodeComment(name))
-      case Some(DocToken(DocToken.Description, _, Some(body)) :: _) => Some(DocumentationComment.fromCodeComment(body))
+    lazy val maybeComment: Option[Comment] = doxText match {
+      case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(Comment.fromCodeComment(name))
+      case Some(DocToken(DocToken.Description, _, Some(body)) :: _) => Some(Comment.fromCodeComment(body))
       case _                                                        => None
     }
   }
@@ -111,21 +106,21 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
       case e: Parsed.Error        => throw e.details
     }
 
-  override def readAlias(sources: ScalaSources): TypeAliases = {
-    val (typeAliasList, methodAliasList) =
-      sources.list().asScala.foldRight((Nil: List[TypeAlias], Nil: List[MethodAlias])) {
+  override def readAlias(sources: ScalaSources): ClassAndMethodComments = {
+    val (classCommentList, methodCommentList) =
+      sources.list().asScala.foldRight((Nil: List[ClassComment], Nil: List[MethodComment])) {
         case (scalaSource, (acc1, acc2)) =>
           val input         = Input.Stream(scalaSource.toInputStream, StandardCharsets.UTF_8)
           val source        = parse(input)
           val documentables = extractFromTree(source)
-          val typeAliasList = for {
+          val classCommentList = for {
             documentable         <- documentables
-            documentationComment <- documentable.maybeDocumentationComment
-          } yield new TypeAlias(documentable.typeIdentifier, documentationComment)
+            documentationComment <- documentable.maybeComment
+          } yield new ClassComment(documentable.typeIdentifier, documentationComment)
 
-          (acc1 ::: typeAliasList, acc2)
+          (acc1 ::: classCommentList, acc2)
       }
-    new TypeAliases(typeAliasList.asJava, methodAliasList.asJava)
+    new ClassAndMethodComments(classCommentList.asJava, methodCommentList.asJava)
   }
 
 }
