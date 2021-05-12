@@ -1,7 +1,7 @@
 package org.dddjava.jig.scala
 
-import org.dddjava.jig.domain.model.jigdocument.documentformat.{ JigDiagramFormat, JigDocument }
-import org.dddjava.jig.domain.model.jigdocument.stationery.LinkPrefix
+import org.dddjava.jig.domain.model.documents.documentformat.{ JigDiagramFormat, JigDocument }
+import org.dddjava.jig.domain.model.documents.stationery.LinkPrefix
 import org.dddjava.jig.domain.model.sources.file.SourcePaths
 import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
@@ -16,32 +16,30 @@ import java.util.StringJoiner
 import scala.collection.JavaConverters._
 
 case class JigConfig(
-    private val documentTypeText: String,
-    private val outputDirectoryText: String,
-    private val outputOmitPrefix: String,
+    private val documents: Seq[JigDocument],
     private val modelPattern: String,
-    private val applicationPattern: String,
-    private val infrastructurePattern: String,
-    private val presentationPattern: String,
+    private val outputDirectoryText: String,
+    private val diagramFormat: JigDiagramFormat,
+    private val omitPrefix: String,
+    private val linkPrefix: String,
     private val projectPath: String,
     private val directoryClasses: String,
     private val directoryResources: String,
-    private val directorySources: String,
-    private val linkPrefix: String
+    private val directorySources: String
 ) {
 
   def propertiesText(): String =
     new StringJoiner("\n")
-      .add("documentType=" + documentTypeText)
-      .add("outputDirectory=" + outputDirectory)
-      .add("output.omit.prefix=" + outputOmitPrefix)
-      .add("jig.model.pattern=" + modelPattern)
-      .add("jig.infrastructure.pattern=" + infrastructurePattern)
+      .add("jig.document.types=" + documents)
+      .add("jig.pattern.domain=" + modelPattern)
+      .add("jig.output.directory=" + outputDirectory)
+      .add("jig.output.diagram.format:svg=" + diagramFormat)
+      .add("jig.omit.prefix=" + omitPrefix)
+      .add("linkPrefix=" + linkPrefix)
       .add("project.path=" + projectPath)
       .add("directory.classes=" + directoryClasses)
       .add("directory.resources=" + directoryResources)
       .add("directory.sources=" + directorySources)
-      .add("linkPrefix=" + linkPrefix)
       .toString
 
   def outputDirectory(): Path = Paths.get(outputDirectoryText)
@@ -70,22 +68,14 @@ case class JigConfig(
   def configuration(): Configuration =
     new Configuration(
       new JigProperties(
-        new OutputOmitPrefix(outputOmitPrefix),
+        documents.asJava,
         modelPattern,
-        applicationPattern,
-        infrastructurePattern,
-        presentationPattern,
-        new LinkPrefix(linkPrefix),
         outputDirectory(),
-        JigDiagramFormat.SVG
+        diagramFormat,
+        new OutputOmitPrefix(omitPrefix),
+        new LinkPrefix(linkPrefix)
       ),
       new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
     )
-
-  def jigDocuments(): Seq[JigDocument] =
-    if (documentTypeText.isEmpty)
-      JigDocument.canonical().asScala
-    else
-      JigDocument.resolve(documentTypeText).asScala
 
 }
