@@ -1,7 +1,10 @@
 package org.dddjava.jig.sbt
 
-import org.dddjava.jig.domain.model.jigdocument.stationery.LinkPrefix
+import org.dddjava.jig.domain.model.documents.documentformat.{ JigDiagramFormat, JigDocument }
+import org.dddjava.jig.domain.model.documents.stationery.LinkPrefix
 import sbt._
+
+import scala.collection.JavaConverters._
 
 object JigPlugin extends AutoPlugin {
 
@@ -13,18 +16,16 @@ object JigPlugin extends AutoPlugin {
 
   override lazy val projectSettings = Seq(
     jigReports := Jig.jigReportsTask(jig).value,
-    jig / jigDocumentTypeText := "",
+    jig / jigDocuments := JigDocument.canonical().asScala,
     jig / jigOutputDirectoryText := "./target/jig",
-    jig / jigOutputOmitPrefix := ".+\\.(service|domain\\.(model|type))\\.",
-    jig / jigModelPattern := ".+\\.domain\\.(model|type)\\..+",
-    jig / jigApplicationPattern := ".+\\.application\\..+",
-    jig / jigInfrastructurePattern := ".+\\.infrastructure\\..+",
-    jig / jigPresentationPattern := ".+\\.presentation\\..+",
+    jig / jigOmitPrefix := ".+\\.(service|domain\\.(model|type))\\.",
+    jig / jigPatternDomain := ".+\\.domain\\.(model|type)\\..+",
+    jig / jigOutputDiagramFormat := JigDiagramFormat.SVG,
+    jig / jigLinkPrefix := LinkPrefix.DISABLE,
     jig / jigProjectPath := "./",
     jig / jigDirectoryClasses := Jig.makeClasses().value,
     jig / jigDirectoryResources := Jig.makeClasses().value,
-    jig / jigDirectorySources := "src/main/scala",
-    jig / jigLinkPrefix := LinkPrefix.DISABLE
+    jig / jigDirectorySources := "src/main/scala"
   )
 
   override lazy val buildSettings = Seq()

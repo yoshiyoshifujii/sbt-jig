@@ -13,18 +13,16 @@ object Jig {
     Def.task {
       JigExecutor.jigReports(
         JigConfig(
-          documentTypeText = (key / jigDocumentTypeText).value,
+          documents = (key / jigDocuments).value,
+          modelPattern = (key / jigPatternDomain).value,
           outputDirectoryText = (key / jigOutputDirectoryText).value,
-          outputOmitPrefix = (key / jigOutputOmitPrefix).value,
-          modelPattern = (key / jigModelPattern).value,
-          applicationPattern = (key / jigApplicationPattern).value,
-          infrastructurePattern = (key / jigInfrastructurePattern).value,
-          presentationPattern = (key / jigPresentationPattern).value,
+          diagramFormat = (key / jigOutputDiagramFormat).value,
+          omitPrefix = (key / jigOmitPrefix).value,
+          linkPrefix = (key / jigLinkPrefix).value,
           projectPath = (key / jigProjectPath).value,
           directoryClasses = (key / jigDirectoryClasses).value,
           directoryResources = (key / jigDirectoryResources).value,
-          directorySources = (key / jigDirectorySources).value,
-          linkPrefix = (key / jigLinkPrefix).value
+          directorySources = (key / jigDirectorySources).value
         )
       )
     }

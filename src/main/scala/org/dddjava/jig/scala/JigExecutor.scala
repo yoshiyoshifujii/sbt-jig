@@ -10,7 +10,6 @@ object JigExecutor {
   def jigReports(cliConfig: JigConfig): Unit = {
 
     val jigMessages   = Utf8ResourceBundle.messageBundle()
-    val jigDocuments  = cliConfig.jigDocuments()
     val configuration = cliConfig.configuration()
 
     println(
@@ -44,7 +43,7 @@ object JigExecutor {
     }
 
     val outputDirectory: Path = cliConfig.outputDirectory()
-    val handleResultList      = jigDocumentHandlers.handleJigDocuments(jigDocuments.asJava, outputDirectory)
+    val handleResultList      = jigDocumentHandlers.handleJigDocuments(configuration.jigDocuments(), outputDirectory)
 
     val resultLog = handleResultList.asScala
       .filter(_.success)

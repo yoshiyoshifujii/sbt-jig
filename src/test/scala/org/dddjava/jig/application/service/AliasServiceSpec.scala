@@ -1,6 +1,6 @@
 package org.dddjava.jig.application.service
 
-import org.dddjava.jig.domain.model.parts.class_.`type`.TypeIdentifier
+import org.dddjava.jig.domain.model.parts.classes.`type`.TypeIdentifier
 import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
 import org.dddjava.jig.domain.model.sources.file.{ SourcePaths, Sources }

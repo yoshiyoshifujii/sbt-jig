@@ -1,7 +1,7 @@
 package org.dddjava.jig.infrastructure
 
-import org.dddjava.jig.domain.model.parts.class_.`type`.{ ClassComment, TypeIdentifier }
-import org.dddjava.jig.domain.model.parts.class_.method.MethodComment
+import org.dddjava.jig.domain.model.parts.classes.`type`.{ ClassComment, TypeIdentifier }
+import org.dddjava.jig.domain.model.parts.classes.method.MethodComment
 import org.dddjava.jig.domain.model.parts.comment.Comment
 import org.dddjava.jig.domain.model.sources.file.text.scalacode.ScalaSources
 import org.dddjava.jig.domain.model.sources.jigreader.{ ClassAndMethodComments, ScalaSourceAliasReader }
