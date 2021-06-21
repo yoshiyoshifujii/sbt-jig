@@ -5,10 +5,9 @@ import org.dddjava.jig.domain.model.documents.stationery.LinkPrefix
 import org.dddjava.jig.domain.model.sources.file.SourcePaths
 import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
-import org.dddjava.jig.domain.model.sources.jigreader.SourceCodeAliasReader
+import org.dddjava.jig.domain.model.sources.jigreader.AdditionalTextSourceReader
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.configuration.{ Configuration, JigProperties, OutputOmitPrefix }
-import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
 
 import java.io.{ IOException, UncheckedIOException }
 import java.nio.file.{ Files, Path, Paths }
@@ -75,7 +74,7 @@ case class JigConfig(
         new OutputOmitPrefix(omitPrefix),
         new LinkPrefix(linkPrefix)
       ),
-      new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
+      new AdditionalTextSourceReader(new ScalametaAliasReader())
     )
 
 }

@@ -4,10 +4,10 @@ import org.dddjava.jig.domain.model.parts.classes.`type`.TypeIdentifier
 import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
 import org.dddjava.jig.domain.model.sources.file.{ SourcePaths, Sources }
-import org.dddjava.jig.domain.model.sources.jigreader.SourceCodeAliasReader
+import org.dddjava.jig.domain.model.sources.jigreader.{ AdditionalTextSourceReader, TextSourceReader }
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
 import org.dddjava.jig.infrastructure.filesystem.LocalFileSourceReader
-import org.dddjava.jig.infrastructure.javaparser.JavaparserAliasReader
+import org.dddjava.jig.infrastructure.javaparser.JavaparserReader
 import org.dddjava.jig.infrastructure.onmemoryrepository.{ OnMemoryCommentRepository, OnMemoryJigSourceRepository }
 import org.scalatest.freespec.AnyFreeSpec
 import stub.domain.model.ScalaMethodScaladocStub.ObjectInObject.ObjectInObjectInObject
@@ -22,11 +22,12 @@ import java.util.Collections
 class AliasServiceSpec extends AnyFreeSpec {
 
   "AliasService" - {
-    lazy val sourceCodeAliasReader   = new SourceCodeAliasReader(new JavaparserAliasReader(), new ScalametaAliasReader())
-    lazy val onMemoryAliasRepository = new OnMemoryCommentRepository()
-    lazy val jigSourceRepository     = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
+    lazy val additionalTextSourceReader = new AdditionalTextSourceReader(new ScalametaAliasReader())
+    lazy val textSourceReader           = new TextSourceReader(new JavaparserReader(), additionalTextSourceReader)
+    lazy val onMemoryAliasRepository    = new OnMemoryCommentRepository()
+    lazy val jigSourceRepository        = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
     lazy val jigSourceReadService =
-      new JigSourceReadService(jigSourceRepository, null, sourceCodeAliasReader, null, null)
+      new JigSourceReadService(jigSourceRepository, null, textSourceReader, null, null)
     lazy val sut: AliasService           = new AliasService(onMemoryAliasRepository)
     lazy val defaultPackageClassURI: URI = this.getClass.getResource("/DefaultPackageClass.class").toURI.resolve("./")
     lazy val getModuleRootPath: Path = {
@@ -51,7 +52,7 @@ class AliasServiceSpec extends AnyFreeSpec {
 
     "Scalaクラス別名取得" in {
       val sources = getTestRawSource
-      jigSourceReadService.readAliases(sources.aliasSource())
+      jigSourceReadService.readTextSources(sources.textSources())
 
       val typeAlias1 = sut.typeAliasOf(new TypeIdentifier(classOf[ScalaStub]))
       assert(typeAlias1.asText() === "ScalaのクラスのDoc")
