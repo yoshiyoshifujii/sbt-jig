@@ -15,17 +15,17 @@ object JigPlugin extends AutoPlugin {
   import autoImport._
 
   override lazy val projectSettings = Seq(
-    jigReports := Jig.jigReportsTask(jig).value,
-    jig / jigDocuments := JigDocument.canonical().asScala,
+    jigReports                   := Jig.jigReportsTask(jig).value,
+    jig / jigDocuments           := JigDocument.canonical().asScala,
     jig / jigOutputDirectoryText := "./target/jig",
-    jig / jigOmitPrefix := ".+\\.(service|domain\\.(model|type))\\.",
-    jig / jigPatternDomain := ".+\\.domain\\.(model|type)\\..+",
+    jig / jigOmitPrefix          := ".+\\.(service|domain\\.(model|type))\\.",
+    jig / jigPatternDomain       := ".+\\.domain\\.(model|type)\\..+",
     jig / jigOutputDiagramFormat := JigDiagramFormat.SVG,
-    jig / jigLinkPrefix := LinkPrefix.DISABLE,
-    jig / jigProjectPath := "./",
-    jig / jigDirectoryClasses := Jig.makeClasses().value,
-    jig / jigDirectoryResources := Jig.makeClasses().value,
-    jig / jigDirectorySources := "src/main/scala"
+    jig / jigLinkPrefix          := LinkPrefix.DISABLE,
+    jig / jigProjectPath         := "./",
+    jig / jigDirectoryClasses    := Jig.makeClasses().value,
+    jig / jigDirectoryResources  := Jig.makeClasses().value,
+    jig / jigDirectorySources    := "src/main/scala"
   )
 
   override lazy val buildSettings = Seq()
