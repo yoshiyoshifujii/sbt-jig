@@ -1,8 +1,8 @@
 lazy val root = (project in file("."))
   .enablePlugins(ScriptedPlugin)
   .settings(
-    name := """sbt-jig""",
-    organization := "com.github.yoshiyoshifujii",
+    name                 := """sbt-jig""",
+    organization         := "com.github.yoshiyoshifujii",
     organizationHomepage := Some(url("https://github.com/yoshiyoshifujii/sbt-jig")),
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(

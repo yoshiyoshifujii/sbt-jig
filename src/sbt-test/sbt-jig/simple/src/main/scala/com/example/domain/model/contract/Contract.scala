@@ -1,9 +1,8 @@
 package com.example.domain.model.contract
 
-/**
- * 契約
- */
+/** 契約
+  */
 case class Contract(
-                   contractId: ContractId,
-                   contractName: ContractName
-                   )
+    contractId: ContractId,
+    contractName: ContractName
+)
