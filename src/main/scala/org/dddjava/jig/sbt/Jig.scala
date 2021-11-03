@@ -29,7 +29,9 @@ object Jig {
 
   def makeClasses(): Initialize[String] =
     Def.setting {
-      s"target/scala-${scalaBinaryVersion.value}/classes"
+      val sv          = scalaVersion.value
+      val scalaSuffix = if (ScalaArtifacts.isScala3(sv)) sv else scalaBinaryVersion.value
+      s"target/scala-$scalaSuffix/classes"
     }
 
 }
