@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
         ExclusionRule("org.apache.poi", "poi"),
         ExclusionRule("org.apache.poi", "poi-ooxml")
       ),
-      "org.scalameta" %% "scalameta" % "4.4.30",
+      "org.scalameta" %% "scalameta" % "4.4.31",
       "org.apache.poi" % "poi"       % "4.1.2",
       "org.apache.poi" % "poi-ooxml" % "4.1.2"
     )
