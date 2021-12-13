@@ -7,7 +7,7 @@ lazy val root = (project in file("."))
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
       "org.scalatest"  %% "scalatest" % "3.2.10" % Test,
-      "org.dddjava.jig" % "jig-core"  % "2021.12.1" excludeAll (
+      "org.dddjava.jig" % "jig-core"  % "2021.12.2" excludeAll (
         ExclusionRule("org.apache.poi", "poi"),
         ExclusionRule("org.apache.poi", "poi-ooxml")
       ),
