@@ -8,12 +8,10 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.scalatest"  %% "scalatest" % "3.2.10" % Test,
       "org.dddjava.jig" % "jig-core"  % "2021.12.3" excludeAll (
-        ExclusionRule("org.apache.poi", "poi"),
-        ExclusionRule("org.apache.poi", "poi-ooxml")
+        ExclusionRule("org.apache.logging.log4j")
       ),
-      "org.scalameta" %% "scalameta" % "4.4.31",
-      "org.apache.poi" % "poi"       % "5.1.0",
-      "org.apache.poi" % "poi-ooxml" % "5.1.0"
+      "org.scalameta"           %% "scalameta" % "4.4.31",
+      "org.apache.logging.log4j" % "log4j-bom" % "2.17.0"
     )
   )
   .settings(
