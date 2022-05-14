@@ -7,9 +7,8 @@ lazy val root = (project in file("."))
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
       "org.scalatest"  %% "scalatest" % "3.2.12" % Test,
-      "org.dddjava.jig" % "jig-core"  % "2022.5.1" excludeAll (
-        ExclusionRule("org.apache.logging.log4j")
-      ),
+      "org.dddjava.jig" % "jig-core"  % "2022.5.1" excludeAll
+      ExclusionRule("org.apache.logging.log4j"),
       "org.scalameta"           %% "scalameta" % "4.5.6",
       "org.apache.logging.log4j" % "log4j-bom" % "2.17.2"
     )
