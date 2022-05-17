@@ -22,9 +22,9 @@ import java.util.Collections
 class AliasServiceSpec extends AnyFreeSpec {
 
   "AliasService" - {
-    lazy val additionalTextSourceReader = new AdditionalTextSourceReader(new ScalametaAliasReader)
-    lazy val textSourceReader           = new TextSourceReader(new JavaparserReader, additionalTextSourceReader)
-    lazy val onMemoryAliasRepository    = new OnMemoryCommentRepository
+    lazy val additionalTextSourceReader = new AdditionalTextSourceReader(new ScalametaAliasReader())
+    lazy val textSourceReader           = new TextSourceReader(new JavaparserReader(), additionalTextSourceReader)
+    lazy val onMemoryAliasRepository    = new OnMemoryCommentRepository()
     lazy val jigSourceRepository        = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
     lazy val jigSourceReadService =
       new JigSourceReadService(jigSourceRepository, null, textSourceReader, null, null)
@@ -47,7 +47,7 @@ class AliasServiceSpec extends AnyFreeSpec {
         )
       )
     lazy val getTestRawSource: Sources = {
-      new LocalFileSourceReader.readSources(getRawSourceLocations)
+      new LocalFileSourceReader().readSources(getRawSourceLocations)
     }
 
     "Scalaクラス別名取得" in {

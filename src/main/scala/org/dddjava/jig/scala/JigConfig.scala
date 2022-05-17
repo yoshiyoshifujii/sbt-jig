@@ -74,7 +74,7 @@ case class JigConfig(
         new OutputOmitPrefix(omitPrefix),
         new LinkPrefix(linkPrefix)
       ),
-      new AdditionalTextSourceReader(new ScalametaAliasReader)
+      new AdditionalTextSourceReader(new ScalametaAliasReader())
     )
 
 }
