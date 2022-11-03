@@ -23,7 +23,8 @@ class AliasServiceSpec extends AnyFreeSpec {
 
   "AliasService" - {
     lazy val additionalTextSourceReader = new AdditionalTextSourceReader(new ScalametaAliasReader())
-    lazy val textSourceReader           = new TextSourceReader(new JavaparserReader(), additionalTextSourceReader)
+    val javaParserReader                = new JavaparserReader(null)
+    lazy val textSourceReader           = new TextSourceReader(javaParserReader, additionalTextSourceReader)
     lazy val onMemoryAliasRepository    = new OnMemoryCommentRepository()
     lazy val jigSourceRepository        = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
     lazy val jigSourceReadService =
