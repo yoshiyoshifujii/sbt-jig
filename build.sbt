@@ -6,12 +6,12 @@ lazy val root = (project in file("."))
     organizationHomepage := Some(url("https://github.com/yoshiyoshifujii/sbt-jig")),
     resolvers += Resolver.jcenterRepo,
     libraryDependencies ++= Seq(
-      "org.scalatest"  %% "scalatest" % "3.2.13" % Test,
+      "org.scalatest"  %% "scalatest" % "3.2.14" % Test,
       "org.dddjava.jig" % "jig-core"  % "2022.10.3" excludeAll (
         ExclusionRule("org.apache.logging.log4j")
       ),
-      "org.scalameta"           %% "scalameta" % "4.5.13",
-      "org.apache.logging.log4j" % "log4j-bom" % "2.18.0"
+      "org.scalameta"           %% "scalameta" % "4.6.0",
+      "org.apache.logging.log4j" % "log4j-bom" % "2.19.0"
     )
   )
   .settings(
