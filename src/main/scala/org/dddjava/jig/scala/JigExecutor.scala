@@ -34,8 +34,7 @@ object JigExecutor {
       }
     }
 
-    val outputDirectory: Path = cliConfig.outputDirectory()
-    val handleResultList      = jigDocumentHandlers.handleJigDocuments(configuration.jigDocuments(), outputDirectory)
+    val handleResultList = jigDocumentHandlers.handleJigDocuments()
 
     val resultLog = handleResultList.asScala
       .filter(_.success)
