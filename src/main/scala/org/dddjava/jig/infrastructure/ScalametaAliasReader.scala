@@ -4,12 +4,13 @@ import org.dddjava.jig.domain.model.parts.classes.`type`.{ ClassComment, TypeIde
 import org.dddjava.jig.domain.model.parts.classes.method.MethodComment
 import org.dddjava.jig.domain.model.parts.comment.Comment
 import org.dddjava.jig.domain.model.sources.file.text.scalacode.ScalaSources
-import org.dddjava.jig.domain.model.sources.jigreader.{ ClassAndMethodComments, ScalaSourceAliasReader }
+import org.dddjava.jig.domain.model.sources.jigfactory.ClassAndMethodComments
+import org.dddjava.jig.domain.model.sources.jigreader.ScalaSourceAliasReader
 
 import java.nio.charset.StandardCharsets
-import scala.collection.JavaConverters._
-import scala.meta._
-import scala.meta.contrib._
+import scala.collection.JavaConverters.*
+import scala.meta.*
+import scala.meta.contrib.*
 
 class ScalametaAliasReader extends ScalaSourceAliasReader {
 
