@@ -34,7 +34,7 @@ object JigExecutor {
       }
     }
 
-    val handleResultList = jigDocumentHandlers.handleJigDocuments()
+    val handleResultList = jigDocumentHandlers.handleJigDocuments().toList
 
     val resultLog = handleResultList.asScala
       .filter(_.success)
