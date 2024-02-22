@@ -6,7 +6,7 @@ import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
 import org.dddjava.jig.domain.model.sources.file.{ SourcePaths, Sources }
 import org.dddjava.jig.domain.model.sources.jigreader.{ AdditionalTextSourceReader, TextSourceReader }
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
-import org.dddjava.jig.infrastructure.filesystem.LocalFileSourceReader
+import org.dddjava.jig.infrastructure.filesystem.LocalClassFileSourceReader
 import org.dddjava.jig.infrastructure.javaparser.JavaparserReader
 import org.dddjava.jig.infrastructure.onmemoryrepository.{ OnMemoryCommentRepository, OnMemoryJigSourceRepository }
 import org.scalatest.freespec.AnyFreeSpec
@@ -48,7 +48,7 @@ class AliasServiceSpec extends AnyFreeSpec {
         )
       )
     lazy val getTestRawSource: Sources = {
-      new LocalFileSourceReader().readSources(getRawSourceLocations)
+      new LocalClassFileSourceReader().readSources(getRawSourceLocations)
     }
 
     "Scalaクラス別名取得" in {
