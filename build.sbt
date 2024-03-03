@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
       "org.dddjava.jig" % "jig-core"  % "2024.2.1" excludeAll (
         ExclusionRule("org.apache.logging.log4j")
       ),
-      "org.scalameta"           %% "scalameta" % "4.9.0",
+      "org.scalameta"           %% "scalameta" % "4.9.1",
       "org.apache.logging.log4j" % "log4j-bom" % "2.23.0"
     )
   )
