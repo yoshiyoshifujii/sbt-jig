@@ -7,12 +7,12 @@ import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
 import org.dddjava.jig.domain.model.sources.jigreader.AdditionalTextSourceReader
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
-import org.dddjava.jig.infrastructure.configuration.{ Configuration, JigProperties, OutputOmitPrefix }
+import org.dddjava.jig.infrastructure.configuration.{ Configuration, JigProperties }
 
 import java.io.{ IOException, UncheckedIOException }
 import java.nio.file.{ Files, Path, Paths }
 import java.util.StringJoiner
-import scala.collection.JavaConverters._
+import scala.collection.JavaConverters.*
 
 case class JigConfig(
     private val documents: Seq[JigDocument],
@@ -71,7 +71,6 @@ case class JigConfig(
         modelPattern,
         outputDirectory(),
         diagramFormat,
-        new OutputOmitPrefix(omitPrefix),
         new LinkPrefix(linkPrefix)
       ),
       new AdditionalTextSourceReader(new ScalametaAliasReader())
