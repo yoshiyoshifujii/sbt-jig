@@ -1,6 +1,5 @@
 package org.dddjava.jig.scala
 
-import java.nio.file.Path
 import scala.collection.JavaConverters._
 
 object JigExecutor {
@@ -15,8 +14,8 @@ object JigExecutor {
 
     val startTime = System.currentTimeMillis
 
-    val jigSourceReadService = configuration.implementationService
-    val jigDocumentHandlers  = configuration.documentHandlers
+    val jigSourceReadService = configuration.sourceReader()
+    val jigDocumentHandlers  = configuration.documentGenerator()
 
     val sourcePaths  = cliConfig.rawSourceLocations()
     val readStatuses = jigSourceReadService.readSourceFromPaths(sourcePaths)
@@ -34,7 +33,7 @@ object JigExecutor {
       }
     }
 
-    val handleResultList = jigDocumentHandlers.handleJigDocuments().toList
+    val handleResultList = jigDocumentHandlers.handleJigDocuments()
 
     val resultLog = handleResultList.asScala
       .filter(_.success)
