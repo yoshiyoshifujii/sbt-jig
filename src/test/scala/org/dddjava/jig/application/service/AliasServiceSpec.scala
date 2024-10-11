@@ -1,11 +1,13 @@
 package org.dddjava.jig.application.service
 
+import org.dddjava.jig.application.{ AliasService, JigSourceReadService }
 import org.dddjava.jig.domain.model.parts.classes.`type`.TypeIdentifier
 import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
 import org.dddjava.jig.domain.model.sources.file.{ SourcePaths, Sources }
 import org.dddjava.jig.domain.model.sources.jigreader.{ AdditionalTextSourceReader, TextSourceReader }
 import org.dddjava.jig.infrastructure.ScalametaAliasReader
+import org.dddjava.jig.infrastructure.asm.AsmFactReader
 import org.dddjava.jig.infrastructure.filesystem.LocalClassFileSourceReader
 import org.dddjava.jig.infrastructure.javaparser.JavaparserReader
 import org.dddjava.jig.infrastructure.onmemoryrepository.{ OnMemoryCommentRepository, OnMemoryJigSourceRepository }
@@ -27,8 +29,9 @@ class AliasServiceSpec extends AnyFreeSpec {
     lazy val textSourceReader           = new TextSourceReader(javaParserReader, additionalTextSourceReader)
     lazy val onMemoryAliasRepository    = new OnMemoryCommentRepository()
     lazy val jigSourceRepository        = new OnMemoryJigSourceRepository(onMemoryAliasRepository)
+    lazy val binarySourceReader         = new AsmFactReader()
     lazy val jigSourceReadService =
-      new JigSourceReadService(jigSourceRepository, null, textSourceReader, null, null)
+      new JigSourceReadService(jigSourceRepository, binarySourceReader, textSourceReader, null, null)
     lazy val sut: AliasService           = new AliasService(onMemoryAliasRepository)
     lazy val defaultPackageClassURI: URI = this.getClass.getResource("/DefaultPackageClass.class").toURI.resolve("./")
     lazy val getModuleRootPath: Path = {
@@ -47,13 +50,12 @@ class AliasServiceSpec extends AnyFreeSpec {
           Collections.singletonList(getModuleRootPath.resolve("src").resolve("test").resolve("scala"))
         )
       )
-    lazy val getTestRawSource: Sources = {
+    lazy val getTestRawSource: Sources =
       new LocalClassFileSourceReader().readSources(getRawSourceLocations)
-    }
 
     "Scalaクラス別名取得" in {
       val sources = getTestRawSource
-      jigSourceReadService.readTextSources(sources.textSources())
+      jigSourceReadService.readProjectData(sources)
 
       val typeAlias1 = sut.typeAliasOf(new TypeIdentifier(classOf[ScalaStub]))
       assert(typeAlias1.asText() === "ScalaのクラスのDoc")
