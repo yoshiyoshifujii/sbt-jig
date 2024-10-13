@@ -18,7 +18,6 @@ object Jig {
           outputDirectoryText = (key / jigOutputDirectoryText).value,
           diagramFormat = (key / jigOutputDiagramFormat).value,
           omitPrefix = (key / jigOmitPrefix).value,
-          linkPrefix = (key / jigLinkPrefix).value,
           projectPath = (key / jigProjectPath).value,
           directoryClasses = (key / jigDirectoryClasses).value,
           directoryResources = (key / jigDirectoryResources).value,

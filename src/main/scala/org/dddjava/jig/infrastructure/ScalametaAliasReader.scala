@@ -38,7 +38,7 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
 
     private lazy val packageName: String    = recursiveGetName(Nil, parent).getOrElse("")
     private lazy val fullName: String       = s"$packageName${tree.name}"
-    lazy val typeIdentifier: TypeIdentifier = new TypeIdentifier(fullName)
+    lazy val typeIdentifier: TypeIdentifier = TypeIdentifier.valueOf(fullName)
 
     lazy val maybeComment: Option[Comment] = doxText match {
       case Some(DocToken(DocToken.Description, Some(name), _) :: _) => Some(Comment.fromCodeComment(name))

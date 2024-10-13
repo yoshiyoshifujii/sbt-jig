@@ -13,7 +13,6 @@ trait JigKeys {
   lazy val jigOmitPrefix          = settingKey[String]("出力時に省略するプレフィックス")
   lazy val jigPatternDomain       = settingKey[String]("ドメインクラスのパターン（正規表現）")
   lazy val jigOutputDiagramFormat = settingKey[JigDiagramFormat]("図のフォーマット（SVG, PNG, DOT）")
-  lazy val jigLinkPrefix          = settingKey[String]("ダイアグラムのリンクのprefix: ソースコードにリンクする際に使用（SVG限定）")
 
   lazy val jigProjectPath        = settingKey[String]("情報を読み取るルートディレクトリ")
   lazy val jigDirectoryClasses   = settingKey[String]("情報を読み取るディレクトリ（sbt準拠）")
