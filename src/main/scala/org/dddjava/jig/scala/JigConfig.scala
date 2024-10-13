@@ -1,7 +1,6 @@
 package org.dddjava.jig.scala
 
 import org.dddjava.jig.domain.model.documents.documentformat.{ JigDiagramFormat, JigDocument }
-import org.dddjava.jig.domain.model.documents.stationery.LinkPrefix
 import org.dddjava.jig.domain.model.sources.file.SourcePaths
 import org.dddjava.jig.domain.model.sources.file.binary.BinarySourcePaths
 import org.dddjava.jig.domain.model.sources.file.text.CodeSourcePaths
@@ -20,7 +19,6 @@ case class JigConfig(
     private val outputDirectoryText: String,
     private val diagramFormat: JigDiagramFormat,
     private val omitPrefix: String,
-    private val linkPrefix: String,
     private val projectPath: String,
     private val directoryClasses: String,
     private val directoryResources: String,
@@ -34,7 +32,6 @@ case class JigConfig(
       .add("jig.output.directory=" + outputDirectory)
       .add("jig.output.diagram.format:svg=" + diagramFormat)
       .add("jig.omit.prefix=" + omitPrefix)
-      .add("linkPrefix=" + linkPrefix)
       .add("project.path=" + projectPath)
       .add("directory.classes=" + directoryClasses)
       .add("directory.resources=" + directoryResources)
@@ -70,8 +67,7 @@ case class JigConfig(
         documents.asJava,
         modelPattern,
         outputDirectory(),
-        diagramFormat,
-        new LinkPrefix(linkPrefix)
+        diagramFormat
       ),
       new AdditionalTextSourceReader(new ScalametaAliasReader())
     )

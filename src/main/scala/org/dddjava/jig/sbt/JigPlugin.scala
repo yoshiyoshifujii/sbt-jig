@@ -1,7 +1,6 @@
 package org.dddjava.jig.sbt
 
 import org.dddjava.jig.domain.model.documents.documentformat.{ JigDiagramFormat, JigDocument }
-import org.dddjava.jig.domain.model.documents.stationery.LinkPrefix
 import sbt._
 
 import scala.collection.JavaConverters._
@@ -21,7 +20,6 @@ object JigPlugin extends AutoPlugin {
     jig / jigOmitPrefix          := ".+\\.(service|domain\\.(model|type))\\.",
     jig / jigPatternDomain       := ".+\\.domain\\.(model|type)\\..+",
     jig / jigOutputDiagramFormat := JigDiagramFormat.SVG,
-    jig / jigLinkPrefix          := LinkPrefix.DISABLE,
     jig / jigProjectPath         := "./",
     jig / jigDirectoryClasses    := Jig.makeClasses().value,
     jig / jigDirectoryResources  := Jig.makeClasses().value,
