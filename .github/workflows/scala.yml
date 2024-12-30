@@ -5,12 +5,12 @@ on: [push, pull_request]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: Set up Graphviz
-      uses: kamiazya/setup-graphviz@v1
+      uses: kamiazya/setup-graphviz@v2
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
