@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Set up Graphviz
-      uses: kamiazya/setup-graphviz@v2
+      uses: ts-graphviz/setup-graphviz@v2.0.2
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
