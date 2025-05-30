@@ -42,7 +42,7 @@ case class JigConfig(
 
   def rawSourceLocations(): SourcePaths =
     try {
-      val projectRoot = Paths.get(projectPath)
+      val projectRoot     = Paths.get(projectPath)
       val binaryCollector =
         new DirectoryCollector(path => path.endsWith(directoryClasses) || path.endsWith(directoryResources))
       Files.walkFileTree(projectRoot, binaryCollector)

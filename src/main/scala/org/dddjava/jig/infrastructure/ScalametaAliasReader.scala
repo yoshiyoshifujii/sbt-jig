@@ -26,10 +26,10 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
     private def recursiveGetName(acc: List[Tree], maybe: Option[TypeIdentifierCandidate]): Option[String] =
       maybe match {
         case Some(c) => recursiveGetName(acc :+ c.tree, c.parent)
-        case None =>
+        case None    =>
           acc match {
             case Nil => None
-            case l =>
+            case l   =>
               Some(
                 l.map(_.packageString).reverse.mkString("")
               )
@@ -111,9 +111,9 @@ class ScalametaAliasReader extends ScalaSourceAliasReader {
     val (classCommentList, methodCommentList) =
       sources.list().asScala.foldRight((Nil: List[ClassComment], Nil: List[MethodComment])) {
         case (scalaSource, (acc1, acc2)) =>
-          val input         = Input.Stream(scalaSource.toInputStream, StandardCharsets.UTF_8)
-          val source        = parse(input)
-          val documentables = extractFromTree(source)
+          val input            = Input.Stream(scalaSource.toInputStream, StandardCharsets.UTF_8)
+          val source           = parse(input)
+          val documentables    = extractFromTree(source)
           val classCommentList = for {
             documentable         <- documentables
             documentationComment <- documentable.maybeComment
