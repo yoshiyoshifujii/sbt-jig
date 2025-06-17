@@ -11,7 +11,7 @@ lazy val root = (project in file("."))
         ExclusionRule("org.apache.logging.log4j")
       ),
       "org.scalameta"           %% "scalameta" % "4.13.7",
-      "org.apache.logging.log4j" % "log4j-bom" % "2.24.3"
+      "org.apache.logging.log4j" % "log4j-bom" % "2.25.0"
     )
   )
   .settings(
